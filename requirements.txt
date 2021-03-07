@@ -1,0 +1,6 @@
+starlette==0.13.6
+fastapi==0.63.0
+gunicorn==20.0.4
+loguru==0.5.3
+prometheus_fastapi_instrumentator==5.7.1
+tabulate==0.8.9

@@ -1,0 +1,11 @@
+version: "2"
+
+services:
+  app:
+    build: .
+    ports:
+      - "8000:80"
+    environment:
+      - "LOG_LEVEL=DEBUG"
+      - "JSON_LOGS=0"
+      - "ENABLE_METRICS=true"

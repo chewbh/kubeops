@@ -1,0 +1,60 @@
+
+# This is the project's root directory
+root = true
+
+[*]
+# Use spaces for indentation
+indent_style = space
+# Each indent should contain 2 spaces
+indent_size = 2
+# Use Unix line endings
+end_of_line = lf
+# The files are utf-8 encoded
+charset = utf-8
+# No whitespace at the end of line
+trim_trailing_whitespace = true
+# A file must end with an empty line - this is good for version control systems
+insert_final_newline = true
+# A line should not have more than this amount of chars (not supported by all plugins)
+max_line_length = 120
+
+[*.py]
+# Each indent should contain 4 spaces for python
+indent_size = 4
+
+[{Makefile,**.mk}]
+# Use tabs for indentation (Makefiles require tabs)
+indent_style = tab
+indent_size = 4
+
+[{*.ng,*.sht,*.html,*.shtm,*.shtml,*.htm}]
+indent_style=space
+indent_size=2
+
+[{*.jhm,*.xslt,*.xul,*.rng,*.xsl,*.xsd,*.ant,*.tld,*.fxml,*.jrxml,*.xml,*.jnlp,*.wsdl}]
+indent_style=space
+indent_size=2
+
+[{.babelrc,.stylelintrc,jest.config,.eslintrc,.prettierrc,*.json,*.jsb3,*.jsb2,*.bowerrc}]
+indent_style=space
+indent_size=2
+
+[*.svg]
+indent_style=space
+indent_size=2
+
+[*.js.map]
+indent_style=space
+indent_size=2
+
+[*.less]
+indent_style=space
+indent_size=2
+
+[*.vue]
+indent_style=space
+indent_size=2
+
+[{.analysis_options,*.yml,*.yaml}]
+indent_style=space
+indent_size=2
