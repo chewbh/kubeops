@@ -1,8 +1,8 @@
-version: "2"
-
 services:
   app:
-    build: .
+    build:
+      context: .
+      target: release
     ports:
       - "8000:80"
     environment:

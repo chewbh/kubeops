@@ -1,5 +1,5 @@
 
-.PHONY: help test build run clean
+.PHONY: help test build run clean update
 
 # Leverge on comment prefix with '##' next to make command as their help text
 help: ## Help command
@@ -20,3 +20,6 @@ run: ## Run the app locally
 
 clean: ## Revert back to clean state
 	docker-compose down
+
+update: ## Update requirements.txt based on imports in src directory
+	~/.local/bin/pipreqs --force --savepath requirements.txt src/app
