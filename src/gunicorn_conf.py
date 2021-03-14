@@ -3,15 +3,15 @@ Gunicorn server configuration
 """
 
 import json
+import logging
 import multiprocessing
 import os
 import sys
-import logging
 
 from gunicorn.glogging import Logger
 from loguru import logger
-from app.logging import InterceptHandler, get_ancestors
 
+from app.logging import InterceptHandler, get_ancestors
 
 workers_per_core_str = os.getenv("WORKERS_PER_CORE", "1")
 max_workers_str = os.getenv("MAX_WORKERS")
@@ -59,6 +59,7 @@ keepalive = int(keepalive_str)
 
 
 # handle logging
+
 
 class StubbedGunicornLogger(Logger):
     def setup(self, cfg):
