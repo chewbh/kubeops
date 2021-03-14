@@ -1,0 +1,7 @@
+black
+coverage
+pytest
+vulture
+flake8
+pre-commit
+mypy

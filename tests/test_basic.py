@@ -1,4 +1,3 @@
-import pytest
 from app.gitops import git_main
 
 

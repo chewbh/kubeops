@@ -1,5 +1,9 @@
-import pytest
+"""Integration tests configuration file."""
 
+# pylint: disable=unused-import
+
+
+import pytest
 from fastapi.testclient import TestClient
 from starlette.config import environ
 
@@ -14,8 +18,7 @@ def pytest_runtest_setup(item):
     if "incremental" in item.keywords:
         previousfailed = getattr(item.parent, "_previousfailed", None)
         if previousfailed is not None:
-            pytest.xfail("previous test failed ({0})".format(
-                previousfailed.name))
+            pytest.xfail("previous test failed ({0})".format(previousfailed.name))
 
 
 def pytest_runtest_makereport(item, call):
@@ -28,6 +31,7 @@ def pytest_runtest_makereport(item, call):
 @pytest.fixture(scope="session")
 def testapp():
     from app.main import app
+
     yield app
 
 

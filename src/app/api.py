@@ -1,10 +1,9 @@
-
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter
 from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.openapi.utils import get_openapi
 from starlette.responses import JSONResponse
 
-from .svcreq import router as svcreq_router
+from .kubernetes.storage.route import router as storage_router
 
 URI_PREFIX_API = "api"
 URI_PREFIX_API_DOCS = "docs"
@@ -18,14 +17,15 @@ api_router = APIRouter(default_response_class=JSONResponse)
 router_v1 = APIRouter()
 
 router_v1.include_router(
-    svcreq_router, prefix="/requests", tags=["service requests"])
+    storage_router, prefix="/storage", tags=["kubernetes", "storage"]
+)
 
 
 # api_router.include_router(authenticated_api_router,
 #     dependencies=[Depends(get_current_user)])
 
-#auth_api_router = APIRouter()
-#api_router.include_router(auth_router, prefix="/auth", tags=["auth"])
+# auth_api_router = APIRouter()
+# api_router.include_router(auth_router, prefix="/auth", tags=["auth"])
 
 # api docs (by version) via open api
 doc_router_v1 = APIRouter()
@@ -33,17 +33,23 @@ doc_router_v1 = APIRouter()
 
 @doc_router_v1.get("/openapi.json", include_in_schema=False)
 async def get_open_api_endpoint_v1():
-    return JSONResponse(get_openapi(
-        title="API Documentation",
-        version=API_VERSION_V1,
-        routes=router_v1.routes))
+    return JSONResponse(
+        get_openapi(
+            title="API Documentation",
+            version=API_VERSION_V1,
+            routes=router_v1.routes,
+            servers=[{"url": f"/{URI_PREFIX_API}/{API_VERSION_V1}"}],
+        )
+    )
 
 
 @doc_router_v1.get("/", include_in_schema=False)
 async def get_api_documentation_v1():
     return get_swagger_ui_html(
         openapi_url=f"/{URI_PREFIX_API}/{API_VERSION_V1}/{URI_PREFIX_API_DOCS}/openapi.json",
-        title="API Documentation")
+        title="API Documentation",
+    )
+
 
 router_v1.include_router(doc_router_v1, prefix=f"/{URI_PREFIX_API_DOCS}")
 api_router.include_router(router_v1, prefix=f"/{API_VERSION_V1}")

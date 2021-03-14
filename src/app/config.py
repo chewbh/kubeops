@@ -1,7 +1,6 @@
+import base64  # noqa: F401
 import logging
 import os
-import base64
-from urllib import parse
 from typing import List
 
 from starlette.config import Config
@@ -25,8 +24,8 @@ config = Config(".env")
 
 SECRET_PROVIDER = config("SECRET_PROVIDER", default=None)
 
-if SECRET_PROVIDER == None:
-    from starlette.datastructures import Secret
+if SECRET_PROVIDER is None:
+    from starlette.datastructures import Secret  # noqa: F401
 
 LOG_LEVEL = config("LOG_LEVEL", default=logging.WARNING)
 
