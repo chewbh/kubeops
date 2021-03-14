@@ -1,8 +1,8 @@
+loguru==0.5.3
 starlette==0.13.6
 pydantic==1.8.1
+tabulate==0.8.9
+prometheus_client==0.9.0
 fastapi==0.63.0
 GitPython==3.1.14
-loguru==0.5.3
-prometheus_client==0.9.0
 prometheus_fastapi_instrumentator==5.7.1
-tabulate==0.8.9

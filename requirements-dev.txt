@@ -1,7 +1,10 @@
 black
 coverage
-pytest
-vulture
 flake8
-pre-commit
+isort
 mypy
+pipreqs
+pre-commit
+pytest
+requests
+vulture

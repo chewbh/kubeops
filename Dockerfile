@@ -15,26 +15,25 @@ RUN pip install --no-cache-dir -r requirements.txt
 ARG NOCACHE=0
 FROM build-base AS test
 
-# COPY --from=base /usr/local/lib/python3.9/site-packages/ /usr/local/lib/python3.9/site-packages/
-
-# RUN pip install --no-cache-dir -r requirements.txt
-RUN pip install --no-cache-dir "pytest" "requests"
+COPY requirements-dev.txt ./
+RUN pip install --no-cache-dir -r requirements-dev.txt
 
 # copy test src
-COPY tests/ ./tests
+COPY . /app
 
-# copy the content of the local src
-COPY src/ .
+# # copy the content of the local src
+# COPY src/ .
 
 # run from test directory
-WORKDIR /tests
+WORKDIR /app
 
 # workaround to skip layer caching to ensure
 # test are always run in build
 ARG NOCACHE
 
 # test is run as part of image build
-RUN [ "pytest" ]
+RUN PYTHONPATH=./src pytest
+RUN flake8 ./src/app tests
 
 # ---
 
