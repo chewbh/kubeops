@@ -1,5 +1,5 @@
 
-.PHONY: help
+.PHONY: help test build run clean
 
 # Leverge on comment prefix with '##' next to make command as their help text
 help: ## Help command
@@ -7,10 +7,16 @@ help: ## Help command
 
 .DEFAULT_GOAL := help
 
+test: ## Run unit tests in container
+	# build arg (NOCACHE) is always set to a random value to
+	# invalidate docker cache to ensure test are rerun
+	docker-compose -f docker-compose.test.yaml build --build-arg NOCACHE=$$(/bin/bash -c 'echo $$RANDOM')
+
 build: ## Build the container
 	docker-compose build
 
-run: ## run the app locally
+run: ## Run the app locally
 	docker-compose up -d
 
 clean: ## Revert back to clean state
+	docker-compose down
